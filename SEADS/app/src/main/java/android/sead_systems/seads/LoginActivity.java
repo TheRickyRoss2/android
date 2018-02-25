@@ -18,13 +18,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 /**
  * Allows the user to log in or create an account.
@@ -48,6 +47,19 @@ public class LoginActivity extends AppCompatActivity {
     private int RC_SIGN_IN = 5;
     private String TAG = "LoginActivity";
     // End google sign in declarations
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser==null) {
+            Log.d(TAG, "user not signed in");
+        } else {
+            Log.d(TAG, "user signed in");
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,12 +114,10 @@ public class LoginActivity extends AppCompatActivity {
 //                .requestIdToken(getString(R.string.default_web_client_id))
 //                .requestEmail()
 //                .build();
-        GoogleSignInOptions gso =
-                new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                        .requestScopes(new Scope(Scopes.DRIVE_APPFOLDER))
-                        .requestServerAuthCode(getString(R.string.default_web_client_id))
-                        .requestEmail()
-                        .build();
+        // Configure Google Sign In
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
 
@@ -140,7 +150,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
-
+//
 //        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
 //        mAuth.signInWithCredential(credential)
 //                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -153,7 +163,7 @@ public class LoginActivity extends AppCompatActivity {
 //                        } else {
 //                            // If sign in fails, display a message to the user.
 //                            Log.d(TAG, "signInWithCredential:failure", task.getException());
-//                            Snackbar.make(findViewById(R.id.main_layout), "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
+////                            Snackbar.make(findViewById(R.id.main_layout), "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
 //                        }
 //
 //                        // ...
@@ -196,7 +206,6 @@ public class LoginActivity extends AppCompatActivity {
     private void authenticateLogin() {
         String emailInput = mEmailField.getText().toString();
         String passwordInput = mPasswordField.getText().toString();
-
 
         mAuth.signInWithEmailAndPassword(emailInput, passwordInput)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
