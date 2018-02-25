@@ -1,9 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'key0android'
+            keyPassword 'seadspassword'
+            storeFile file('C:/Users/jungk/Desktop/cmps116/testkeystore.jks')
+            storePassword 'passwordseads'
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion '26.0.2'
-
     defaultConfig {
         applicationId "android.sead_systems.seads"
         minSdkVersion 14
@@ -15,6 +22,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
 }
@@ -24,7 +32,7 @@ repositories {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.0'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.0'
@@ -32,8 +40,10 @@ dependencies {
     compile 'com.roughike:bottom-bar:2.0.2'
     compile 'com.google.firebase:firebase-core:11.8.0'
     compile 'com.google.firebase:firebase-auth:11.8.0'
+    compile 'com.google.android.gms:play-services-auth:11.8.0'
     compile 'com.google.firebase:firebase-database:11.8.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:recyclerview-v7:23.4.0'
+
 }
 apply plugin: 'com.google.gms.google-services'

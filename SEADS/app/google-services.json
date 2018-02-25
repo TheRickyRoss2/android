@@ -15,6 +15,10 @@
       },
       "oauth_client": [
         {
+          "client_id": "479035987448-i7m6be9m6cr5qcnktt9j3hvqf3deivdk.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
           "client_id": "479035987448-61nghc016q94c93nm1hn5e4kpqgfuedo.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -56,15 +60,15 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
+              "client_id": "479035987448-i7m6be9m6cr5qcnktt9j3hvqf3deivdk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
               "client_id": "479035987448-tl4hfd0ksje1alk5ai0kudql9unci1go.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.SEAD-Systems.SEAD-Systems-iOS-Application.SEAD-Systems-iOS-Application"
               }
-            },
-            {
-              "client_id": "479035987448-njgcggl0ot49qucegmqovf4bds7ql45t.apps.googleusercontent.com",
-              "client_type": 3
             }
           ]
         },

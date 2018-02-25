@@ -3,7 +3,6 @@ package android.sead_systems.seads;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.sead_systems.seads.dashboard.DashboardActivity;
 import android.sead_systems.seads.main_menu.MainMenuActivity;
 import android.support.v7.app.AppCompatActivity;
 
@@ -11,7 +10,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * First activity loaded when cold-booting the app. Determines whether the user should be sent to
- * {@link WelcomeActivity}, {@link LoginActivity}, or {@link DashboardActivity}.
+ * {@link WelcomeActivity}, {@link LoginActivity}, or {@link MainMenuActivity}.
  * @author Talal Abou Haiba
  */
 
@@ -24,7 +23,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         mAuth = FirebaseAuth.getInstance();
-
+        mAuth.signOut();
         SharedPreferences sharedPreferences = getSharedPreferences(
                 getString(R.string.shared_preferences), MODE_PRIVATE);
 

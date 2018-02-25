@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 public class PagerAdapterSEADS extends FragmentPagerAdapter {
     private int PAGE_COUNT;
     private String tabTitles[];// = new String[] { "Devices", "Rooms", "Overview" };
