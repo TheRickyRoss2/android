@@ -247,7 +247,7 @@ public class WeeklyStatsFragment extends Fragment implements WebInterface, OnCha
                         return decimalFormat.format(value)+" kWh";
                     }
                 });
-                barData.setValueTextSize(14f);
+                barData.setValueTextSize(10f);
                 mBarChart.setData(barData);
                 BarDataSet barDataSet = (BarDataSet) mBarChart.getData().getDataSetByIndex(0);
                 barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
