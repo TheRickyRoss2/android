@@ -298,7 +298,7 @@ public class MonthlyStatsFragment extends Fragment implements WebInterface, OnCh
                     mDataPoints.add(new DataPoint(hour, dataPoint.getDouble("energy")));
                 }
 
-                for(int i = 0;i<data.length();i++){
+                for(int i = 0;i< (data.length()<24*7?data.length():24*7);i++){
                     JSONObject dataPoint = data.getJSONObject(i);
                     int hour = CostCalculator.getHourFromDateTime(dataPoint.getString("time"));
                     mWeekPoints.add(new DataPoint(hour, dataPoint.getDouble("energy")));
@@ -313,11 +313,11 @@ public class MonthlyStatsFragment extends Fragment implements WebInterface, OnCh
 
 
                 String daily_cost_string = "\n  Daily Usage\n\n  "+
-                        new DecimalFormat("$#0").format(CostCalculator.energyCost(mDataPoints)/7.0)+
+                        new DecimalFormat("$#0").format(CostCalculator.energyCost(mDataPoints)*24/mDataPoints.size())+
                         "\n\n               "+
-                        new DecimalFormat("#0.00 kWh").format(CostCalculator.avgEnergy(mDataPoints)/7.0);
+                        new DecimalFormat("#0.00 kWh").format(CostCalculator.avgEnergy(mDataPoints)*24/mDataPoints.size());
                 cost1 = CostCalculator.energyCost(mDataPoints);
-                energy1 = CostCalculator.avgEnergy(mDataPoints)/7.0;
+                energy1 = CostCalculator.avgEnergy(mDataPoints);
                 daily_cost.setTextSize(22f);
                 daily_cost.setTextColor(Color.WHITE);
                 daily_cost.setText(daily_cost_string);
