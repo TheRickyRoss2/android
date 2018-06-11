@@ -213,7 +213,7 @@ public class MonthlyStatsFragment extends Fragment implements WebInterface, OnCh
             Log.d("MonthlyStatsFragment", "Sent:"+mRequestCount);
         }
         webInterfacer.getJSONObject(
-                CostCalculator.getFirstDayWeek()==(current_time-current_time%DAY_INT)?CostCalculator.getFirstDayWeek()-7*DAY_INT:CostCalculator.getFirstDayWeek(),
+                CostCalculator.getFirstDayMonth(),
                 current_time-current_time%DAY_INT,
                 "energy",
                 60*60,
@@ -291,21 +291,25 @@ public class MonthlyStatsFragment extends Fragment implements WebInterface, OnCh
                 ArrayList<DataPoint> mDataPoints = new ArrayList<>();
                 ArrayList<DataPoint> mWeekPoints = new ArrayList<>();
                 ArrayList<DataPoint> mYstrPoints = new ArrayList<>();
+
                 for(int i = 0; i<data.length();i++){
                     JSONObject dataPoint = data.getJSONObject(i);
                     int hour = CostCalculator.getHourFromDateTime(dataPoint.getString("time"));
                     mDataPoints.add(new DataPoint(hour, dataPoint.getDouble("energy")));
                 }
+
                 for(int i = 0;i<data.length();i++){
                     JSONObject dataPoint = data.getJSONObject(i);
                     int hour = CostCalculator.getHourFromDateTime(dataPoint.getString("time"));
                     mWeekPoints.add(new DataPoint(hour, dataPoint.getDouble("energy")));
                 }
+
                 for(int i = 0;i<24;i++){
                     JSONObject dataPoint = data.getJSONObject(i);
                     int hour = CostCalculator.getHourFromDateTime(dataPoint.getString("time"));
                     mYstrPoints.add(new DataPoint(hour, dataPoint.getDouble("energy")));
                 }
+                Log.d("Data Length:", data.length()+"");
 
 
                 String daily_cost_string = "\n  Daily Usage\n\n  "+

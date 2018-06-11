@@ -119,6 +119,8 @@ public class RoomVisualizationFragment extends Fragment implements WebInterface 
         //set button
 
         webInterfacer = new WebInterfacer(this);
+        mChart.setClickable(false);
+
         getData();
         //test.getJSONObject();
 
@@ -280,6 +282,7 @@ public class RoomVisualizationFragment extends Fragment implements WebInterface 
         set.setDrawFilled(true);
         Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.fade_green);
         set.setFillDrawable(drawable);
+        set.setDrawHighlightIndicators(false);
         return set;
     }
 
